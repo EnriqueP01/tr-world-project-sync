@@ -112,8 +112,7 @@ $webClient.Headers.Add("User-Agent", "TR-Sync-Client")
 $webClient.DownloadFile($downloadUrl, $tempZip)
 
 Write-Host "[+] Installation des nouveaux fichiers..." -ForegroundColor Cyan
-Add-Type -AssemblyName System.IO.Compression.FileSystem
-[System.IO.Compression.ZipFile]::ExtractToDirectory($tempZip, $instanceDir, $true)
+Expand-Archive -Path $tempZip -DestinationPath $instanceDir -Force
 Remove-Item $tempZip -Force -ErrorAction SilentlyContinue
 
 # Nettoyage des vieux mods obsoletes si manifest present
